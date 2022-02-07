@@ -1,12 +1,16 @@
 import React, { useRef } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
-export default function AddPostModal({show, handleClose}) {
+import { usePosts } from '../context/PostContext';
+
+export default function AddPostModal({ show, handleClose }) {
   const titleRef = useRef();
   const messageRef = useRef();
+  const { getPosts, createPost } = usePosts();
 
   function handleSubmit(e){
     e.preventDefault();
     console.log("submit!!");
+    createPost();
     handleClose()
   }
   
