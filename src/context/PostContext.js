@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 const PostContext = React.createContext();
 
@@ -7,28 +7,48 @@ export function usePosts() {
 }
 
 export const PostProvider = ({ children }) => {
+    const [posts, setPosts] = useState([]) 
+    const [currentPost, setCurrentPost] = useState()
 
-
-    function getPosts () {
-        axios("")
+    async function getPosts () {
+       await axios.get("http://localhost:5000/app/getPosts").then(response => {
+           setPosts(response.data)
+       })
     }
 
-    function createPost() {
-        const newPost = {
-            title: "heelooooo",
-            message: "heeelloooooo woooorlddddd!!!!!",
-            author: "hugo"
-        }
-        axios.post("http://localhost:5000/app/createPost", newPost)
+    function createPost(newPost) {
+        axios.post("http://localhost:5000/app/createPost", newPost).then(() => {
+            getPosts()
+        })
     }
 
+    function deletePost(postId) {
+        axios.delete("http://localhost:5000/app/deletePost", {
+            data: {id: postId}
+        }).then((info) => {
+            console.log(info)
+            getPosts()
+        })
+    }
+
+    function updatePost(postId) {
+        axios.put("http://localhost:5000/app/updatePost", {
+            id: postId,
+            
+        }).then(info => {
+            console.log(info)
+            getPosts()
+        })
+    }
     return (
         <PostContext.Provider value={{
+            posts,
             getPosts,
-            createPost
+            createPost,
+            deletePost,
+            updatePost
         }}>
             {children}
         </PostContext.Provider>
     )
 }
-
