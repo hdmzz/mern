@@ -17,10 +17,18 @@ export const PostProvider = ({ children }) => {
     }
 
     function createPost(newPost) {
-        axios.post("http://localhost:5000/app/createPost", newPost).then(() => {
-            getPosts()
+        axios.post("http://localhost:5000/app/createPost", newPost, {
+            headers: {
+                
+            }
         })
+        .then(() => {
+            //getPosts()
+            console.log('ok')
+        })
+        .catch((err) => console.log(err))
     }
+
 
     function deletePost(postId) {
         axios.delete("http://localhost:5000/app/deletePost", {

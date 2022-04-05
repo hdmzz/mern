@@ -6,7 +6,6 @@ export default function AddPostModal({ show, post, setCurrentPost, handleClose }
   const titleRef = useRef();
   const messageRef = useRef();
   const { getPosts, createPost, updatePost } = usePosts();
-  console.log(post);
   function handleSubmit(e){
     e.preventDefault();
     console.log("submit!!");
