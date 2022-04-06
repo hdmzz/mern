@@ -17,11 +17,7 @@ export const PostProvider = ({ children }) => {
     }
 
     function createPost(newPost) {
-        axios.post("http://localhost:5000/app/createPost", newPost, {
-            headers: {
-                
-            }
-        })
+        axios.post("http://localhost:5000/app/createPost", newPost)
         .then(() => {
             //getPosts()
             console.log('ok')

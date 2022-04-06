@@ -4,7 +4,7 @@ import { usePosts } from '../context/PostContext';
 
 export default function AddPostModal({ show, post, setCurrentPost, handleClose }) {
   const titleRef = useRef();
-  const messageRef = useState()
+  const messageRef = useRef();
   const [file, setFile] = useState();
   const { getPosts, createPost, updatePost } = usePosts();
   
@@ -15,15 +15,10 @@ export default function AddPostModal({ show, post, setCurrentPost, handleClose }
     formData.append('message', messageRef.current.value)
     formData.append('file', file)
     console.log("submit!!")
-    /* const newPost = {
-      title: titleRef.current.value,
-      message: messageRef.current.value,
-      file: file
-    } */
     createPost(formData)
-     /*setCurrentPost(false)
+    setCurrentPost(false)
     getPosts()
-    handleClose(); */
+    handleClose()
   }
   function hideModal() {
     setCurrentPost(false)
