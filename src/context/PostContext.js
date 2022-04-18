@@ -26,9 +26,12 @@ export const PostProvider = ({ children }) => {
     }
 
 
-    function deletePost(postId) {
+    function deletePost(postId, imageUrl) {
         axios.delete("http://localhost:5000/app/deletePost", {
-            data: {id: postId}
+            data: {
+                id: postId,
+                imageUrl
+            }
         }).then((info) => {
             console.log(info)
             getPosts()
